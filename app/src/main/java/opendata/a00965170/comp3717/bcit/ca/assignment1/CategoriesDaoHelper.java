@@ -5,52 +5,57 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import opendata.a00965170.comp3717.bcit.ca.database.schema.Categories;
+import opendata.a00965170.comp3717.bcit.ca.database.schema.CategoriesDao;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.DaoMaster;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.DaoSession;
-import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
-import opendata.a00965170.comp3717.bcit.ca.database.schema.DatasetsDao;
 
 /**
- * Created by namblue on 2/7/2017.
+ * Created by NamBlue on 2/7/2017.
  */
 
-public class DatasetsDaoHelper
+public class CategoriesDaoHelper
 {
     //Singleton
-    public static DatasetsDao datasetsDao;
+    public static CategoriesDao categoriesDao;
     public static final String DB_NAME = "DATASETS"; //Name of Db file in the Device
 
     //---------------------------------SQL QUERY Functions-----------------------------------------//
-    public static List<Datasets> getDatasetsFromSQL(){
-        if(datasetsDao != null)
+    public static List<Categories> getCategoriesFromSQL(){
+        if(categoriesDao != null)
         {
-            List<Datasets> datasetsList = datasetsDao.queryBuilder().orderAsc(DatasetsDao.Properties.Id).build().list();
+            List<Categories> categoriesList = categoriesDao.queryBuilder().orderAsc(CategoriesDao.Properties.Id).build().list();
 
-            //Get the list of all Datasets in Database in descending order
-            if (datasetsList.size() > 0)
+            //Get the list of all Categories in Database in descending order
+            if (categoriesList.size() > 0)
             {  //if list is not null
-
-                return datasetsList;
+                return categoriesList;
                 //get(0)--> 1st object
-                // getMetadata() is the function in Datasets class
+                // getMetadata() is the function in Categories class
             }
         }
         return null;
     }
 
-    public static void SaveToSQL(Datasets datasets_object) {
-        if(datasetsDao != null)
+    public static long getCategoryIdByPK(long pk)
+    {
+        List<Categories> categoriesList = categoriesDao.queryBuilder().where(CategoriesDao.Properties.Id.eq(pk)).orderAsc(CategoriesDao.Properties.Id).build().list();
+        return categoriesDao.queryBuilder().where(CategoriesDao.Properties.Id.eq(pk)).unique().getCategory_id();
+    }
+
+    public static void SaveToSQL(Categories categories) {
+        if(categoriesDao != null)
         {
-            datasetsDao.insert(datasets_object);
+            categoriesDao.insert(categories);
         }
     }
     //----------------------------***END SQL QUERY***---------------------------------------------//
 
     //-------------------------------DB Setup Functions---------------------------------------------//
 
-    //Return the Configured LogDao Object
+    //Return the Configured CategoriesDao Object
     public static void setupDb(Context context){
-        if(datasetsDao == null)
+        if(categoriesDao == null)
         {
             DaoMaster.DevOpenHelper masterHelper = new DaoMaster.DevOpenHelper(context, DB_NAME, null); //create database db file if not exist
 
@@ -58,13 +63,14 @@ public class DatasetsDaoHelper
             // db file
             DaoMaster master = new DaoMaster(db);//create masterDao
             DaoSession masterSession = master.newSession(); //Creates Session session
-            datasetsDao = masterSession.getDatasetsDao();
+            categoriesDao = masterSession.getCategoriesDao();
         }
     }
 
     public static void closeDb()
     {
-        datasetsDao = null;
+        categoriesDao = null;
     }
     //-------------------------***END DB setup Functions***---------------------------------------//
 }
+

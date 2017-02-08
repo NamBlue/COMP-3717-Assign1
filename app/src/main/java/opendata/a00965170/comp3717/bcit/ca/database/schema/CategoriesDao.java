@@ -23,7 +23,8 @@ public class CategoriesDao extends AbstractDao<Categories, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Category = new Property(1, String.class, "Category", false, "CATEGORY");
+        public final static Property Category_name = new Property(1, String.class, "category_name", false, "CATEGORY_NAME");
+        public final static Property Category_id = new Property(2, long.class, "category_id", false, "CATEGORY_ID");
     }
 
 
@@ -39,8 +40,9 @@ public class CategoriesDao extends AbstractDao<Categories, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CATEGORIES\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"CATEGORY\" TEXT NOT NULL );"); // 1: Category
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"CATEGORY_NAME\" TEXT NOT NULL ," + // 1: category_name
+                "\"CATEGORY_ID\" INTEGER NOT NULL );"); // 2: category_id
     }
 
     /** Drops the underlying database table. */
@@ -57,7 +59,8 @@ public class CategoriesDao extends AbstractDao<Categories, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getCategory());
+        stmt.bindString(2, entity.getCategory_name());
+        stmt.bindLong(3, entity.getCategory_id());
     }
 
     @Override
@@ -68,7 +71,8 @@ public class CategoriesDao extends AbstractDao<Categories, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        stmt.bindString(2, entity.getCategory());
+        stmt.bindString(2, entity.getCategory_name());
+        stmt.bindLong(3, entity.getCategory_id());
     }
 
     @Override
@@ -80,7 +84,8 @@ public class CategoriesDao extends AbstractDao<Categories, Long> {
     public Categories readEntity(Cursor cursor, int offset) {
         Categories entity = new Categories( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.getString(offset + 1) // Category
+            cursor.getString(offset + 1), // category_name
+            cursor.getLong(offset + 2) // category_id
         );
         return entity;
     }
@@ -88,7 +93,8 @@ public class CategoriesDao extends AbstractDao<Categories, Long> {
     @Override
     public void readEntity(Cursor cursor, Categories entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setCategory(cursor.getString(offset + 1));
+        entity.setCategory_name(cursor.getString(offset + 1));
+        entity.setCategory_id(cursor.getLong(offset + 2));
      }
     
     @Override

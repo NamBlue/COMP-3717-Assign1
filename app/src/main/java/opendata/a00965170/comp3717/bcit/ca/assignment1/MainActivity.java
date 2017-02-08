@@ -1,7 +1,6 @@
 package opendata.a00965170.comp3717.bcit.ca.assignment1;
 
 import android.app.ListActivity;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,18 +10,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import opendata.a00965170.comp3717.bcit.ca.database.schema.DaoMaster;
-import opendata.a00965170.comp3717.bcit.ca.database.schema.DaoSession;
+import opendata.a00965170.comp3717.bcit.ca.database.schema.Categories;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
-import opendata.a00965170.comp3717.bcit.ca.database.schema.DatasetsDao;
 
 public class MainActivity extends ListActivity
 {
     private TextView text;
     private List<String> listValues;
-    private Datasets temp_datasets; // Used for creating a LOG Object
     private List<Datasets> datasetsList;
-    private  final String DB_NAME ="DATASETS-db" ;  //Name of Db file in the Device
+    private List<Categories> categoriesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,18 +29,19 @@ public class MainActivity extends ListActivity
         text = (TextView) findViewById(R.id.mainText);
 
         //Initialise DAO
+        CategoriesDaoHelper.setupDb(this);
         DatasetsDaoHelper.setupDb(this);
 
-        temp_datasets = new Datasets(null, "Toilets", "This is one toilet", 0);
-        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        ContentProvider.populateDatabase();
 
         listValues = new ArrayList<String>();
+        categoriesList = CategoriesDaoHelper.getCategoriesFromSQL();
         datasetsList = DatasetsDaoHelper.getDatasetsFromSQL();
-        if (datasetsList != null)
+        if (categoriesList != null)
         {
-            for(Datasets ds: datasetsList)
+            for(Categories cl: categoriesList)
             {
-                listValues.add(ds.getMetadata());
+                listValues.add(cl.getCategory_name());
             }
         }
 
@@ -64,11 +61,18 @@ public class MainActivity extends ListActivity
         super.onListItemClick(list, view, position, id);
         String selectedItem = (String) getListView().getItemAtPosition(position);
         //String selectedItem = (String) getListAdapter().getItem(position);
+        long category_id = CategoriesDaoHelper.getCategoryIdByPK(position);
         text.setText("You clicked " + selectedItem + " at position " + position);
 
         String country;
         country = selectedItem;
 
+
+    }
+
+    @Override
+    protected void onDestroy()
+    {
 
     }
 }

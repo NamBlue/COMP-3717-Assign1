@@ -10,11 +10,12 @@ import org.greenrobot.greendao.annotation.*;
 @Entity
 public class Categories {
 
-    @Id
+    @Id(autoincrement = true)
     private Long id;
 
     @NotNull
-    private String Category;
+    private String category_name;
+    private long category_id;
 
     @Generated
     public Categories() {
@@ -25,9 +26,10 @@ public class Categories {
     }
 
     @Generated
-    public Categories(Long id, String Category) {
+    public Categories(Long id, String category_name, long category_id) {
         this.id = id;
-        this.Category = Category;
+        this.category_name = category_name;
+        this.category_id = category_id;
     }
 
     public Long getId() {
@@ -39,13 +41,21 @@ public class Categories {
     }
 
     @NotNull
-    public String getCategory() {
-        return Category;
+    public String getCategory_name() {
+        return category_name;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setCategory(@NotNull String Category) {
-        this.Category = Category;
+    public void setCategory_name(@NotNull String category_name) {
+        this.category_name = category_name;
+    }
+
+    public long getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(long category_id) {
+        this.category_id = category_id;
     }
 
 }
