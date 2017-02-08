@@ -50,7 +50,7 @@ public class DatasetsDao extends AbstractDao<Datasets, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"DATASETS\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"DATASETS_NAME\" TEXT NOT NULL ," + // 1: datasets_name
                 "\"DATASETS_METADATA\" TEXT," + // 2: datasets_metadata
                 "\"CATEGORY_ID\" INTEGER);"); // 3: category_id

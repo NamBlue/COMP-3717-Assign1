@@ -13,6 +13,7 @@ public class AboutActivity extends Activity
     private Intent intent;
     private String name;
     private Datasets dataset;
+    private long selectedPK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,8 +24,9 @@ public class AboutActivity extends Activity
 
         intent = getIntent();
         name = intent.getStringExtra("name");
+        selectedPK = intent.getLongExtra("pk", -1);
 
-        dataset = DatasetsDaoHelper.getDatasetByName(name);
+        dataset = DatasetsDaoHelper.getDatasetByPK(selectedPK);
         textView.setText(dataset.getDatasets_metadata());
     }
 }

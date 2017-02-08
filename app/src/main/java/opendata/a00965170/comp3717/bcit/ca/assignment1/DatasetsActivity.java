@@ -62,6 +62,7 @@ public class DatasetsActivity extends ListActivity
 
         final Intent intent = new Intent(this, AboutActivity.class);
         intent.putExtra("name", selectedItem);
+        intent.putExtra("pk", (long)(position + 1));
         startActivityForResult(intent, 1);
     }
 }

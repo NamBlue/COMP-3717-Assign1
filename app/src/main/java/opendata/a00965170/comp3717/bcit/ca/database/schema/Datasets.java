@@ -14,7 +14,7 @@ import org.greenrobot.greendao.DaoException;
 @Entity(active = true)
 public class Datasets {
 
-    @Id(autoincrement = true)
+    @Id
     private Long id;
 
     @NotNull

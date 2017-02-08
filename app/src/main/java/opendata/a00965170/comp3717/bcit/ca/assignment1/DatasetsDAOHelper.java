@@ -67,6 +67,16 @@ public class DatasetsDaoHelper
         return null;
     }
 
+    public static Datasets getDatasetByPK(long pk)
+    {
+        if(datasetsDao != null)
+        {
+            Datasets dataset = datasetsDao.queryBuilder().where(DatasetsDao.Properties.Id.eq(pk)).unique();
+            return dataset;
+        }
+        return null;
+    }
+
     public static void SaveToSQL(Datasets datasets_object) {
         if(datasetsDao != null)
         {

@@ -40,7 +40,7 @@ public class CategoriesDao extends AbstractDao<Categories, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CATEGORIES\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"CATEGORY_NAME\" TEXT NOT NULL ," + // 1: category_name
                 "\"CATEGORY_ID\" INTEGER NOT NULL );"); // 2: category_id
     }

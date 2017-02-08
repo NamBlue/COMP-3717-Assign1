@@ -17,12 +17,12 @@ public class MainGenerator
 
         //Entity i.e. Class to be stored in the database // ie table Datasets
         Entity categories= schema.addEntity("Categories");
-        categories.addIdProperty().primaryKey().autoincrement(); //It is the primary key for uniquely identifying a row
+        categories.addIdProperty().primaryKey(); //It is the primary key for uniquely identifying a row
         categories.addStringProperty("category_name").notNull();  //Not null is SQL constrain
         categories.addLongProperty("category_id").notNull(); //FK for datasets
 
         Entity datasets= schema.addEntity("Datasets");
-        datasets.addIdProperty().primaryKey().autoincrement(); //It is the primary key for uniquely identifying a row
+        datasets.addIdProperty().primaryKey(); //It is the primary key for uniquely identifying a row
         Property datasetsName = datasets.addStringProperty("datasets_name").notNull().getProperty();
         datasets.addStringProperty("datasets_metadata");
 

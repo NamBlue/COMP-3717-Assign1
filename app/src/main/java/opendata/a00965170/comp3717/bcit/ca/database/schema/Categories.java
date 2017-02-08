@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.*;
 @Entity
 public class Categories {
 
-    @Id(autoincrement = true)
+    @Id
     private Long id;
 
     @NotNull
