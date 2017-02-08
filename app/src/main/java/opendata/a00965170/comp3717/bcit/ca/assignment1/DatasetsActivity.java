@@ -32,7 +32,7 @@ public class DatasetsActivity extends ListActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.datasets_activity);
         intent = getIntent();
-        category_id = intent.getLongExtra("id", -1);
+        category_id = intent.getLongExtra("pk", -1);
 
         listValues = new ArrayList<String>();
         datasetsList = DatasetsDaoHelper.getDatasetsById(category_id);

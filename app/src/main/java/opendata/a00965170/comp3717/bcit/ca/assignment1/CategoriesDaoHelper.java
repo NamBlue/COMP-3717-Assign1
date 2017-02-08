@@ -37,6 +37,16 @@ public class CategoriesDaoHelper
         return null;
     }
 
+    public static Categories getCategoryByPK(long pk)
+    {
+        if(categoriesDao != null)
+        {
+            Categories dataset = categoriesDao.queryBuilder().where(CategoriesDao.Properties.Id.eq(pk)).unique();
+            return dataset;
+        }
+        return null;
+    }
+
     public static Categories getCategoryById(long fk)
     {
         return categoriesDao.queryBuilder().where(CategoriesDao.Properties.Category_id.eq(fk)).unique();

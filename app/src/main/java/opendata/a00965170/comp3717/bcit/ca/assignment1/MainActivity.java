@@ -18,7 +18,6 @@ public class MainActivity extends ListActivity
 {
     private TextView text;
     private List<String> listValues;
-    private List<Datasets> datasetsList;
     private List<Categories> categoriesList;
 
     @Override
@@ -38,7 +37,6 @@ public class MainActivity extends ListActivity
 
         listValues = new ArrayList<String>();
         categoriesList = CategoriesDaoHelper.getCategoriesFromSQL();
-        datasetsList = DatasetsDaoHelper.getDatasetsFromSQL();
         if (categoriesList != null)
         {
             for(Categories cl: categoriesList)
@@ -61,12 +59,11 @@ public class MainActivity extends ListActivity
     @Override
     protected void onListItemClick(ListView list, View view, int position, long id) {
         super.onListItemClick(list, view, position, id);
-        String selectedItem = (String) getListView().getItemAtPosition(position);
-        Categories categories = CategoriesDaoHelper.getCategoryById(position + 1);
-        text.setText("You clicked " + categories.getCategory_name() + " at position " + categories.getCategory_id());
+        Categories categories = categoriesList.get(position);
+        text.setText("You clicked " + categories.getCategory_name() + " at position " + categories.getId());
 
         final Intent intent = new Intent(this, DatasetsActivity.class);
-        intent.putExtra("id", categories.getCategory_id());
+        intent.putExtra("pk", categories.getId());
         startActivityForResult(intent, 1);
     }
 }

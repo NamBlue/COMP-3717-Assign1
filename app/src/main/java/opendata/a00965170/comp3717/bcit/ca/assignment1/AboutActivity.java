@@ -3,6 +3,7 @@ package opendata.a00965170.comp3717.bcit.ca.assignment1;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
@@ -28,5 +29,10 @@ public class AboutActivity extends Activity
 
         dataset = DatasetsDaoHelper.getDatasetByPK(selectedPK);
         textView.setText(dataset.getDatasets_metadata());
+    }
+
+    public void return_button_onClick(View view)
+    {
+        finish();
     }
 }
