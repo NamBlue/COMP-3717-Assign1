@@ -12,7 +12,9 @@ public class Datasets {
 
     @Id
     private Long id;
+    private String Name;
     private String Metadata;
+    private int CategoryID;
 
     @Generated
     public Datasets() {
@@ -23,9 +25,11 @@ public class Datasets {
     }
 
     @Generated
-    public Datasets(Long id, String Metadata) {
+    public Datasets(Long id, String Name, String Metadata, int CategoryID) {
         this.id = id;
+        this.Name = Name;
         this.Metadata = Metadata;
+        this.CategoryID = CategoryID;
     }
 
     public Long getId() {
@@ -36,12 +40,28 @@ public class Datasets {
         this.id = id;
     }
 
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
     public String getMetadata() {
         return Metadata;
     }
 
     public void setMetadata(String Metadata) {
         this.Metadata = Metadata;
+    }
+
+    public int getCategoryID() {
+        return CategoryID;
+    }
+
+    public void setCategoryID(int CategoryID) {
+        this.CategoryID = CategoryID;
     }
 
 }

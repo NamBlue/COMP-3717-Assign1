@@ -19,7 +19,9 @@ public class MainGenerator
         datasets.addIdProperty(); //It is the primary key for uniquely identifying a row
 
         categories.addStringProperty("Category").notNull();  //Not null is SQL constrain
+        datasets.addStringProperty("Name");
         datasets.addStringProperty("Metadata");
+        datasets.addIntProperty("CategoryID").notNull();
 
         //  ./app/src/main/java/   ----   com/codekrypt/greendao/db is the full path
         new DaoGenerator().generateAll(schema, "./app/src/main/java");

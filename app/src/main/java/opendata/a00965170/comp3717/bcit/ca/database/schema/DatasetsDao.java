@@ -23,7 +23,9 @@ public class DatasetsDao extends AbstractDao<Datasets, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Metadata = new Property(1, String.class, "Metadata", false, "METADATA");
+        public final static Property Name = new Property(1, String.class, "Name", false, "NAME");
+        public final static Property Metadata = new Property(2, String.class, "Metadata", false, "METADATA");
+        public final static Property CategoryID = new Property(3, int.class, "CategoryID", false, "CATEGORY_ID");
     }
 
 
@@ -40,7 +42,9 @@ public class DatasetsDao extends AbstractDao<Datasets, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"DATASETS\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"METADATA\" TEXT);"); // 1: Metadata
+                "\"NAME\" TEXT," + // 1: Name
+                "\"METADATA\" TEXT," + // 2: Metadata
+                "\"CATEGORY_ID\" INTEGER NOT NULL );"); // 3: CategoryID
     }
 
     /** Drops the underlying database table. */
@@ -58,10 +62,16 @@ public class DatasetsDao extends AbstractDao<Datasets, Long> {
             stmt.bindLong(1, id);
         }
  
+        String Name = entity.getName();
+        if (Name != null) {
+            stmt.bindString(2, Name);
+        }
+ 
         String Metadata = entity.getMetadata();
         if (Metadata != null) {
-            stmt.bindString(2, Metadata);
+            stmt.bindString(3, Metadata);
         }
+        stmt.bindLong(4, entity.getCategoryID());
     }
 
     @Override
@@ -73,10 +83,16 @@ public class DatasetsDao extends AbstractDao<Datasets, Long> {
             stmt.bindLong(1, id);
         }
  
+        String Name = entity.getName();
+        if (Name != null) {
+            stmt.bindString(2, Name);
+        }
+ 
         String Metadata = entity.getMetadata();
         if (Metadata != null) {
-            stmt.bindString(2, Metadata);
+            stmt.bindString(3, Metadata);
         }
+        stmt.bindLong(4, entity.getCategoryID());
     }
 
     @Override
@@ -88,7 +104,9 @@ public class DatasetsDao extends AbstractDao<Datasets, Long> {
     public Datasets readEntity(Cursor cursor, int offset) {
         Datasets entity = new Datasets( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // Metadata
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // Name
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // Metadata
+            cursor.getInt(offset + 3) // CategoryID
         );
         return entity;
     }
@@ -96,7 +114,9 @@ public class DatasetsDao extends AbstractDao<Datasets, Long> {
     @Override
     public void readEntity(Cursor cursor, Datasets entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setMetadata(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setMetadata(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setCategoryID(cursor.getInt(offset + 3));
      }
     
     @Override

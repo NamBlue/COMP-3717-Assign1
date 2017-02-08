@@ -1,7 +1,7 @@
 package opendata.a00965170.comp3717.bcit.ca.assignment1;
 
 import android.app.ListActivity;
-import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,22 +11,43 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import opendata.a00965170.comp3717.bcit.ca.database.schema.DaoMaster;
+import opendata.a00965170.comp3717.bcit.ca.database.schema.DaoSession;
+import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
+import opendata.a00965170.comp3717.bcit.ca.database.schema.DatasetsDao;
+
 public class MainActivity extends ListActivity
 {
     private TextView text;
     private List<String> listValues;
+    private Datasets temp_datasets; // Used for creating a LOG Object
+    private List<Datasets> datasetsList;
+    private  final String DB_NAME ="DATASETS-db" ;  //Name of Db file in the Device
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text = (TextView) findViewById(R.id.mainText);
 
+        //Initialise DAO
+        DatasetsDaoHelper.setupDb(this);
+
+        temp_datasets = new Datasets(null, "Toilets", "This is one toilet", 0);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+
         listValues = new ArrayList<String>();
-        listValues.add("Hong Kong");
-        listValues.add("South Africa");
-        listValues.add("Canada");
+        datasetsList = DatasetsDaoHelper.getDatasetsFromSQL();
+        if (datasetsList != null)
+        {
+            for(Datasets ds: datasetsList)
+            {
+                listValues.add(ds.getMetadata());
+            }
+        }
+
 
 
         // initiate the listadapter
