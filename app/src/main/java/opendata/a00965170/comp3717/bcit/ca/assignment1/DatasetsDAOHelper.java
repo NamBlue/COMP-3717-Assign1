@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.List;
 
+import opendata.a00965170.comp3717.bcit.ca.database.schema.CategoriesDao;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.DaoMaster;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.DaoSession;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
@@ -24,7 +25,7 @@ public class DatasetsDaoHelper
     public static List<Datasets> getDatasetsFromSQL(){
         if(datasetsDao != null)
         {
-            List<Datasets> datasetsList = datasetsDao.queryBuilder().orderAsc(DatasetsDao.Properties.Id).build().list();
+            List<Datasets> datasetsList = datasetsDao.queryBuilder().orderAsc(DatasetsDao.Properties.Category_id).build().list();
 
             //Get the list of all Datasets in Database in descending order
             if (datasetsList.size() > 0)
@@ -34,6 +35,34 @@ public class DatasetsDaoHelper
                 //get(0)--> 1st object
                 // getMetadata() is the function in Datasets class
             }
+        }
+        return null;
+    }
+
+    public static List<Datasets> getDatasetsById(long id)
+    {
+        if(datasetsDao != null)
+        {
+            List<Datasets> datasetsList = datasetsDao.queryBuilder().where(DatasetsDao.Properties.Category_id.eq(id)).orderAsc(DatasetsDao.Properties.Category_id).build().list();
+
+            //Get the list of all Datasets in Database in descending order
+            if (datasetsList.size() > 0)
+            {  //if list is not null
+
+                return datasetsList;
+                //get(0)--> 1st object
+                // getMetadata() is the function in Datasets class
+            }
+        }
+        return null;
+    }
+
+    public static Datasets getDatasetByName(String name)
+    {
+        if(datasetsDao != null)
+        {
+            Datasets dataset = datasetsDao.queryBuilder().where(DatasetsDao.Properties.Datasets_name.eq(name)).unique();
+            return dataset;
         }
         return null;
     }

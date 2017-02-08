@@ -1,12 +1,12 @@
 package opendata.a00965170.comp3717.bcit.ca.assignment1;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,36 +14,33 @@ import java.util.List;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Categories;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
 
-public class MainActivity extends ListActivity
+/**
+ * Created by NamBlue on 2/7/2017.
+ */
+
+public class DatasetsActivity extends ListActivity
 {
-    private TextView text;
     private List<String> listValues;
     private List<Datasets> datasetsList;
-    private List<Categories> categoriesList;
+    private long category_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        final Intent intent;
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        text = (TextView) findViewById(R.id.mainText);
-
-        //Initialise DAO
-        CategoriesDaoHelper.setupDb(this);
-        DatasetsDaoHelper.setupDb(this);
-
-        ContentProvider.clearDatabase();
-        ContentProvider.populateDatabase();
+        setContentView(R.layout.datasets_activity);
+        intent = getIntent();
+        category_id = intent.getLongExtra("id", -1);
 
         listValues = new ArrayList<String>();
-        categoriesList = CategoriesDaoHelper.getCategoriesFromSQL();
-        datasetsList = DatasetsDaoHelper.getDatasetsFromSQL();
-        if (categoriesList != null)
+        datasetsList = DatasetsDaoHelper.getDatasetsById(category_id);
+        if (datasetsList != null)
         {
-            for(Categories cl: categoriesList)
+            for(Datasets ds: datasetsList)
             {
-                listValues.add(cl.getCategory_name());
+                listValues.add(ds.getDatasets_name());
             }
         }
 
@@ -62,13 +59,9 @@ public class MainActivity extends ListActivity
     protected void onListItemClick(ListView list, View view, int position, long id) {
         super.onListItemClick(list, view, position, id);
         String selectedItem = (String) getListView().getItemAtPosition(position);
-        Categories categories = CategoriesDaoHelper.getCategoryById(position + 1);
-        text.setText("You clicked " + categories.getCategory_name() + " at position " + categories.getCategory_id());
 
-        final Intent intent = new Intent(this, DatasetsActivity.class);
-        intent.putExtra("id", categories.getCategory_id());
+        final Intent intent = new Intent(this, AboutActivity.class);
+        intent.putExtra("name", selectedItem);
         startActivityForResult(intent, 1);
     }
 }
-
-

@@ -37,10 +37,9 @@ public class CategoriesDaoHelper
         return null;
     }
 
-    public static long getCategoryIdByPK(long pk)
+    public static Categories getCategoryById(long fk)
     {
-        List<Categories> categoriesList = categoriesDao.queryBuilder().where(CategoriesDao.Properties.Id.eq(pk)).orderAsc(CategoriesDao.Properties.Id).build().list();
-        return categoriesDao.queryBuilder().where(CategoriesDao.Properties.Id.eq(pk)).unique().getCategory_id();
+        return categoriesDao.queryBuilder().where(CategoriesDao.Properties.Category_id.eq(fk)).unique();
     }
 
     public static void SaveToSQL(Categories categories) {

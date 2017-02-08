@@ -17,16 +17,17 @@ public class ContentProvider
             temp_categories = new Categories(null, "Street Information", 2L);
             CategoriesDaoHelper.SaveToSQL(temp_categories);
 
-            Datasets temp_datasets = new Datasets(null, "Toilets", "This is one toilet", 1L);
+            Datasets temp_datasets = new Datasets(null, "Accessible Public Washrooms", "Listing of all the accessible washrooms that are available within the City.", 1L);
             DatasetsDaoHelper.SaveToSQL(temp_datasets);
-            temp_datasets = new Datasets(null, "Addresses", "Addresses of new west", 2L);
+            temp_datasets = new Datasets(null, "Addresses", "A list of addresses for the City of New Westminster.", 2L);
             DatasetsDaoHelper.SaveToSQL(temp_datasets);
-
+            temp_datasets = new Datasets(null, "Bike Routes", "This dataset contains bike routes including planned and current bikeways, on-street and off-street, as well as dedicated lanes.", 2L);
+            DatasetsDaoHelper.SaveToSQL(temp_datasets);
     }
 
     public static void clearDatabase()
     {
-        CategoriesDaoHelper.categoriesDao.dropTable(CategoriesDaoHelper.categoriesDao.getDatabase(), true);
-        DatasetsDaoHelper.datasetsDao.dropTable(DatasetsDaoHelper.datasetsDao.getDatabase(), true);
+        CategoriesDaoHelper.categoriesDao.deleteAll();
+        DatasetsDaoHelper.datasetsDao.deleteAll();
     }
 }
