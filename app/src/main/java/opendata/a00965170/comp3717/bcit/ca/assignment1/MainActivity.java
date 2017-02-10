@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,6 @@ import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
 
 public class MainActivity extends ListActivity
 {
-    private TextView text;
     private List<String> listValues;
     private List<Categories> categoriesList;
 
@@ -26,7 +26,6 @@ public class MainActivity extends ListActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        text = (TextView) findViewById(R.id.mainText);
 
         //Initialise DAO
         CategoriesDaoHelper.setupDb(this);
@@ -60,7 +59,7 @@ public class MainActivity extends ListActivity
     protected void onListItemClick(ListView list, View view, int position, long id) {
         super.onListItemClick(list, view, position, id);
         Categories categories = categoriesList.get(position);
-        text.setText("You clicked " + categories.getCategory_name() + " at position " + categories.getId());
+        System.out.println("You clicked " + categories.getCategory_name() + " at position " + categories.getId());
 
         final Intent intent = new Intent(this, DatasetsActivity.class);
         intent.putExtra("pk", categories.getId());

@@ -11,18 +11,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="opendata.a00965170.comp3717.bcit.ca.assignment1.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello List!"
-        android:id="@+id/mainText"/>
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainText"
         android:id="@android:id/list"
-        android:background="#aaaaaa"/>
+        android:background="#eff4f4"/>
 
     <TextView
         android:layout_width="wrap_content"
