@@ -11,35 +11,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="opendata.a00965170.comp3717.bcit.ca.assignment1.AboutActivity">
 
-    <TextView
-        android:text="About"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:id="@+id/aboutLabel"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal|bold"
-        android:textSize="24sp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/aboutLabel"
-        android:layout_marginTop="34dp"
-        android:id="@+id/textDisplay"
-        android:layout_alignParentStart="true"/>
-
     <Button
         android:text="Return"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="117dp"
         android:id="@+id/return_button"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/aboutLabel"
-        android:onClick="return_button_onClick"/>
+        android:onClick="return_button_onClick"
+        android:textSize="12sp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:text="About"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/aboutLabel"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal|bold"
+        android:textSize="30sp"
+        android:layout_alignBottom="@+id/return_button"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:text="textDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/textDisplay"
+        android:layout_below="@+id/return_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
