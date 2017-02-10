@@ -29,6 +29,10 @@ public class AboutActivity extends Activity
 
         dataset = DatasetsDaoHelper.getDatasetByPK(selectedPK);
         textView.setText(dataset.getDatasets_metadata());
+        if(dataset.getDatasets_metadata().equalsIgnoreCase(""))
+        {
+            textView.setText("No Description Available");
+        }
     }
 
     public void return_button_onClick(View view)

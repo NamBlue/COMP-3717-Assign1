@@ -16,14 +16,7 @@ public class ContentProvider
         populateCityLand();
         populateUndergroundData();
         populateMiscellaneous();
-
-
-        Datasets temp_datasets = new Datasets(null, "Accessible Public Washrooms", "Listing of all the accessible washrooms that are available within the City.", 1L);
-        DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Addresses", "A list of addresses for the City of New Westminster.", 2L);
-        DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Bike Routes", "This dataset contains bike routes including planned and current bikeways, on-street and off-street, as well as dedicated lanes.", 2L);
-        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        populatePublicUtilities();
     }
 
     public static void populateCategories()
@@ -382,8 +375,40 @@ public class ContentProvider
 
     public static void populatePublicUtilities()
     {
-
-    }
+        Datasets temp_datasets = new Datasets(null, "Accessible Public Washrooms", "Listing of all the accessible washrooms that are available within the City.", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Alternative Fuels and Electric Charging Stations", "Electric vehicles are an environmentally friendly mode of transportation. As cleaner emission vehicles gain momentum across the lower mainland, the City of New Westminster is putting itself on the map alongside leading municipalities by incorporating electric vehicles into the City's automotive fleet and installing electric vehicle charging stations in the community.\n" +
+                "\n" +
+                "For a map of EV charging stations and their availability, visit Go Electric " +
+                "Stations.", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Bus Stops", "Bus Stop locations within New Westminster noting which are accessible.", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Cemeteries", "No Description Available", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Community Service Assets", "A listing of community services and supports. More specifically, it includes information on emergency, transitional and supportive housing; transition and second stage housing for women; addiction and mental health services; drop-in and meal programs; education and job training opportunities; and government services.", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Drinking Fountains", "No Description Available", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Off Leash Dog Areas", "No Description Available", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Park Benches and Dedications", "Park benches locations throughout the city. Green: Undedicated benches Purple : Dedicated benches", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Park Greenspaces", "No Description Available", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Parking Pay Stations", "Identifies the locations of all multi-space digital pay stations for parking in the City.", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Parks", "No Description Available", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Playgrounds", "Includes the playgrounds within the parks in the City and the types of equipment available for play.", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "SkyTrain Stations Points", "SkyTrain Stations within New Westminster shown as point locations.", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Sports Fields", "Sports Fields will include various types of activity fields including those used for softball, soccer, rugby, football, and lacrosse.", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Wheelchair Ramps", "", 5L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+}
 
     public static void clearDatabase()
     {
