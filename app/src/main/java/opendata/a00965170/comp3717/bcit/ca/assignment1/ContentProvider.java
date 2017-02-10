@@ -13,6 +13,7 @@ public class ContentProvider
     {
         populateCategories();
         populateCityData();
+        populateCityLand();
         populateUndergroundData();
         populateMiscellaneous();
 
@@ -208,6 +209,121 @@ public class ContentProvider
                 "about the use of the data.", 1L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
         temp_datasets = new Datasets(null, "Workforce Profile (NHS 2011)", "2011 National Household Survey information on workers who work in New Westminster (regardless of municipality of residence). Information includes occupation, industry, employment income (before-tax), work activity, age and sex and education. Also contains descriptive information about the data source files and notes about the use of the data.", 1L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+    }
+
+    public static void populateCityLand()
+    {
+        Datasets temp_datasets = new Datasets(null, "Block Reference File", "The blocks " +
+                "correspond to a division of the City into about 400 blocks, set up by the City " +
+                "Planner in about 1970. The purpose of these geographic descriptions was to " +
+                "enable more rapid tallying of information by subareas of the City. The " +
+                "geographic subdivision keys would provide easier selection of which properties " +
+                "to include in a run for a report without having to rely on property folio " +
+                "designations which are subject to change, consolidation and subdivision.\n" +
+                "\n" +
+                "Block reference file used with \"Historical Development Statistics\" and " +
+                "\"Landuse Percentages by Block\" datasets", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Building Age", "The age of most buildings in the City (year it was built) as well as some historical data such as the Building Name, Developer/Builder, Architect/Designer and year the building has been moved if relevant and available.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Building Attributes", "Building development specifics including the number of floors above and below ground, the number of residential units, square footage, size of the footprint and site coverage, and address.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Building Footprints", "Outlines of buildings. All primary buildings such as residential and commerical are included.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "City Boundaries", "City of New Westminster Boundaries.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "City Facility Sites", "No Description Available", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "City Owned Property", "Parcels of property currently owned by the Corporation of the City of New Westminster.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Contours", "1 meter intervals", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Fire and Rescue Services Buildings", "No Description Available", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Heritage Register", "Official listing of properties deemed to have heritage value. Visit the Heritage Register Website Viewer.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Heritage Resource Inventory", "Complete unofficial listing of properties deemed to have heritage value, demolished and standing buildings. Visit the Heritage Resource Inventory Website Viewer!", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Hospital Buildings", "No Description Available", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Land Use", "Land use represents what a parcel of land is currently being used for (i.e., the land parcel’s primary use). The land use shown in this layer does not necessarily reflect the zoning or the OCP designation of the land.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Land Use Industrial", "Land use represents what a parcel of land is currently being used for (i.e., the land parcel’s primary use). The land use shown in this layer does not necessarily reflect the zoning or the OCP designation of the land.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Landuse Percentages by block", "The Landuse " +
+                "Percentages show what proportion of a block/area has a particular use (e.g., " +
+                "being used for Commercial purposes or Single Family Residences).\n" +
+                "\n" +
+                "Use in conjunction with the Block Reference Dataset", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Neighbourhoods Boundaries", "These new boundaries are used for contemporary planning functions and are the basis for most of the statistics used in recent Census data published by the City of New Westminster. The boundaries for all neighbourhoods except for Downtown, North Arm North and Queens Park are the same for the redefined neighbourhood boundaries as in the original neighbourhood boundaries. ", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Parcel Blocks", "Block outlines of contiguous aggregated parcels.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Park Structures", "Park Structure data will include " +
+                "the structure name, structure type, quantity, monument dedication inscription, " +
+                "furnishing photo graph (as available) park name and/or location. The types of " +
+                "park structures included in the collection are • Bleachers • drinking fountains " +
+                "• Park Lighting • Monuments • Basketball hoops • Horticultural Planting Areas • " +
+                "Picnic Tables\n" +
+                "\n" +
+                "Monument dedication inscriptions were provided to the City for publically " +
+                "displayed on the monument, and as such the City has approval for the release. " +
+                "The inscription includes name, potentially a date range and inscription. ", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Police Buildings", "No Description Available", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Projects on the Go", "Current applications for rezoning, development permit and heritage revitalization agreement projects currently being processed by the City, including application status, architect/ developer information, and staff contact.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "School Buildings", "No Description Available", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "School Catchment Boundaries", "Primary, Middle and Secondary School Boundaries.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "School Sites", "No Description Available", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "SkyTrain Stations", "SkyTrain Stations within New Westminster shown as footprints of the structure shapes.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Survey Monuments", "For more information see Mascot at GeoBC Reference Systems and Survey Monuments.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Tree Inventory - East", "Street trees do more than " +
+                "beautify our City and create community pride. Street trees have been " +
+                "scientifically proven to: save energy by reduce heating or cooling costs for " +
+                "buildings they cover calm traffic clean air filter dust absorb sound cool area " +
+                "under tree and absorb humidity provide habitats for birds, mammals and insects\n" +
+                "\n" +
+                "Parks staff select street trees based on established research to ensure the " +
+                "trees are viable without damaging public or private property and are resilient " +
+                "to disease and pests. Street trees generally have the following characteristics:" +
+                " Small to medium size (20 – 35 feet at maturity) Raised crown to provide maximum" +
+                " clearance between the sidewalk and lower branches Non-aggressive root systems " +
+                "Growth habits that are compatible with streetscapes (i.e. trees with upright " +
+                "growth habits are used in narrow spaces) Ornamental characteristics (i.e. bark, " +
+                "fall colour, flowers, etc.) that enhance the neighbourhood.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Tree Inventory - West", "Street trees do more than " +
+                "beautify our City and create community pride. Street trees have been " +
+                "scientifically proven to: save energy by reduce heating or cooling costs for " +
+                "buildings they cover calm traffic clean air filter dust absorb sound cool area " +
+                "under tree and absorb humidity provide habitats for birds, mammals and insects\n" +
+                "\n" +
+                "Parks staff select street trees based on established research to ensure the " +
+                "trees are viable without damaging public or private property and are resilient " +
+                "to disease and pests. Street trees generally have the following characteristics:" +
+                " Small to medium size (20 – 35 feet at maturity) Raised crown to provide maximum" +
+                " clearance between the sidewalk and lower branches Non-aggressive root systems " +
+                "Growth habits that are compatible with streetscapes (i.e. trees with upright " +
+                "growth habits are used in narrow spaces) Ornamental characteristics (i.e. bark, " +
+                "fall colour, flowers, etc.) that enhance the neighbourhood.", 2L);
+        DatasetsDaoHelper.SaveToSQL(temp_datasets);
+        temp_datasets = new Datasets(null, "Zoning", "The City of New Westminster Zoning Bylaw No" +
+                ". 6680 was adopted by Council September 17, 2001. Subsequent amendments to the " +
+                "Zoning Bylaw are consolidated for convenience only. For accurate interpretation," +
+                " the public is encouraged to consult the Official Zoning Bylaw (including maps " +
+                "and amendments) available for viewing at City Hall in the Planning Division or " +
+                "Legislative Services Department.\n" +
+                "\n" +
+                "For more information: http://www.newwestcity.ca/city_hall/bylaws/articles250.php", 2L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
     }
 
