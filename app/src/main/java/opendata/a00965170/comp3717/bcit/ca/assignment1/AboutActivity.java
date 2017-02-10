@@ -27,7 +27,7 @@ public class AboutActivity extends Activity
         name = intent.getStringExtra("name");
         selectedPK = intent.getLongExtra("pk", -1);
 
-        dataset = DatasetsDaoHelper.getDatasetByPK(selectedPK);
+        dataset = DaoHelper.getDatasetByPK(selectedPK);
         textView.setText(dataset.getDatasets_metadata());
         if(dataset.getDatasets_metadata().equalsIgnoreCase(""))
         {

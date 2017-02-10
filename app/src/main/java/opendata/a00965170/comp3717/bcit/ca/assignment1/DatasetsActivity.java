@@ -1,6 +1,5 @@
 package opendata.a00965170.comp3717.bcit.ca.assignment1;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import opendata.a00965170.comp3717.bcit.ca.database.schema.Categories;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
 
 /**
@@ -35,7 +33,7 @@ public class DatasetsActivity extends ListActivity
         category_id = intent.getLongExtra("pk", -1);
 
         listValues = new ArrayList<String>();
-        datasetsList = DatasetsDaoHelper.getDatasetsById(category_id);
+        datasetsList = DaoHelper.getDatasetsById(category_id);
         if (datasetsList != null)
         {
             for(Datasets ds: datasetsList)

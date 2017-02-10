@@ -6,14 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Categories;
-import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
 
 public class MainActivity extends ListActivity
 {
@@ -28,14 +25,13 @@ public class MainActivity extends ListActivity
         setContentView(R.layout.activity_main);
 
         //Initialise DAO
-        CategoriesDaoHelper.setupDb(this);
-        DatasetsDaoHelper.setupDb(this);
+        DaoHelper.setupDb(this);
 
         ContentProvider.clearDatabase();
         ContentProvider.populateDatabase();
 
         listValues = new ArrayList<String>();
-        categoriesList = CategoriesDaoHelper.getCategoriesFromSQL();
+        categoriesList = DaoHelper.getCategoriesFromSQL();
         if (categoriesList != null)
         {
             for(Categories cl: categoriesList)
