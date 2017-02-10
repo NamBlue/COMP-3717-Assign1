@@ -13,7 +13,7 @@ public class ContentProvider
     {
         populateCategories();
 
-        populateMiscellaneous();
+        populateUndergroundData();
 
         Datasets temp_datasets = new Datasets(null, "Accessible Public Washrooms", "Listing of all the accessible washrooms that are available within the City.", 1L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
@@ -39,21 +39,21 @@ public class ContentProvider
         CategoriesDaoHelper.SaveToSQL(temp_categories);
     }
 
-    public static void populateMiscellaneous()
+    public static void populateUndergroundData()
     {
-        Datasets temp_datasets = new Datasets(null, "Oil Tanks (Removed/Decommissioned)", "The number of underground storage tanks that are active, removed, or outstanding in the removal process, by year.", 4L);
+        Datasets temp_datasets = new Datasets(null, "Oil Tanks (Removed/Decommissioned)", "The number of underground storage tanks that are active, removed, or outstanding in the removal process, by year.", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Sewer Catchbasins", "No Description Available", 4L);
+        temp_datasets = new Datasets(null, "Sewer Catchbasins", "No Description Available", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Sewer Culverts", "No Description Available", 4L);
+        temp_datasets = new Datasets(null, "Sewer Culverts", "No Description Available", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Sewer Ditches", "No Description Available", 4L);
+        temp_datasets = new Datasets(null, "Sewer Ditches", "No Description Available", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Sewer Mains", "No Description Available", 4L);
+        temp_datasets = new Datasets(null, "Sewer Mains", "No Description Available", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Sewer Maintenance Holes", "No Description Available", 4L);
+        temp_datasets = new Datasets(null, "Sewer Maintenance Holes", "No Description Available", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Water Pressure Zones", "This polygon feature class represents each water pressure zone in the City of New Westminster water distribution system. The data was developed to represent the location of water pressure zones for the purpose of mapping, analysis, planning and maintenance of utilities. The accuracy of this data varies and should not be used for precise measurements or calculations.", 4L);
+        temp_datasets = new Datasets(null, "Water Pressure Zones", "This polygon feature class represents each water pressure zone in the City of New Westminster water distribution system. The data was developed to represent the location of water pressure zones for the purpose of mapping, analysis, planning and maintenance of utilities. The accuracy of this data varies and should not be used for precise measurements or calculations.", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
         temp_datasets = new Datasets(null, "Water Quality Data", "A hydrant is an outlet from a " +
                 "fluid main often consisting of an upright pipe with a valve attached from which " +
@@ -71,11 +71,11 @@ public class ContentProvider
                 "\n" +
                 "NWR HPC 2015.xlsm - Monthly heterotrophic plate count\n" +
                 "\n" +
-                "NWR 4Q DBP.xlsm - 4th quarter disinfectant by product reports", 4L);
+                "NWR 4Q DBP.xlsm - 4th quarter disinfectant by product reports", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Water Valves", "A device that regulates the flow of water.", 4L);
+        temp_datasets = new Datasets(null, "Water Valves", "A device that regulates the flow of water.", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
-        temp_datasets = new Datasets(null, "Watermains", "A principal pipe in a system of pipes for conveying water, especially one installed underground.", 4L);
+        temp_datasets = new Datasets(null, "Watermains", "A principal pipe in a system of pipes for conveying water, especially one installed underground.", 3L);
         DatasetsDaoHelper.SaveToSQL(temp_datasets);
     }
 
