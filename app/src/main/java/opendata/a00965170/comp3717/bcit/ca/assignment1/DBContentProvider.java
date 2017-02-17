@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
-public class NameContentProvider
+public class DBContentProvider
     extends ContentProvider
 {
     private static final UriMatcher uriMatcher;

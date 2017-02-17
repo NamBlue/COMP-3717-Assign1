@@ -160,7 +160,7 @@ public class DatabaseHelper
 
     public Datasets getDatasetByID(long pk)
     {
-        List<Datasets> datasets = datasetsDao.queryBuilder().where(CategoriesDao.Properties.Id.eq(pk)).limit(1).list();
+        List<Datasets> datasets = datasetsDao.queryBuilder().where(DatasetsDao.Properties.Id.eq(pk)).limit(1).list();
         Datasets dataset;
 
         if(datasets.isEmpty())

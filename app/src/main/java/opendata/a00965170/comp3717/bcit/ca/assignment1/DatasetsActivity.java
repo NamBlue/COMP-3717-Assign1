@@ -14,7 +14,6 @@ import android.widget.SimpleCursorAdapter;
 
 import java.util.List;
 
-import opendata.a00965170.comp3717.bcit.ca.database.schema.Categories;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.DatasetsDao;
 
@@ -64,11 +63,8 @@ public class DatasetsActivity extends ListActivity
     @Override
     protected void onListItemClick(ListView list, View view, int position, long id) {
         super.onListItemClick(list, view, position, id);
-        Datasets datasets = datasetsList.get(position);
-        System.out.println("You clicked " + datasets.getDatasets_name() + " at position " + datasets.getId());
-
         final Intent intent = new Intent(this, AboutActivity.class);
-        intent.putExtra("pk", datasets.getId());
+        intent.putExtra("pk", id);
         startActivityForResult(intent, 1);
     }
 
@@ -82,7 +78,7 @@ public class DatasetsActivity extends ListActivity
             final Uri uri;
             final CursorLoader loader;
 
-            uri    = NameContentProvider.DATASET_CONTENT_URI;
+            uri    = DBContentProvider.DATASET_CONTENT_URI;
             String where = "category_id=" + args.getLong("pk");
             loader = new CursorLoader(DatasetsActivity.this, uri, null, where, null, null);
 

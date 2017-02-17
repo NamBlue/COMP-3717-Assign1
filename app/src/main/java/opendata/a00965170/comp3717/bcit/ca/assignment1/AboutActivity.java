@@ -12,7 +12,7 @@ public class AboutActivity extends Activity
 {
     private TextView textView;
     private Intent intent;
-    private String name;
+    private final DatabaseHelper helper = DatabaseHelper.getInstance(this);
     private Datasets dataset;
     private long selectedPK;
 
@@ -24,10 +24,9 @@ public class AboutActivity extends Activity
         textView = (TextView) findViewById(R.id.textDisplay);
 
         intent = getIntent();
-        name = intent.getStringExtra("name");
         selectedPK = intent.getLongExtra("pk", -1);
 
-        dataset = DaoHelper.getDatasetByPK(selectedPK);
+        dataset = helper.getDatasetByID(selectedPK);
         textView.setText(dataset.getDatasets_metadata());
         if(dataset.getDatasets_metadata().equalsIgnoreCase(""))
         {

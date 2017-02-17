@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import opendata.a00965170.comp3717.bcit.ca.database.schema.Categories;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.CategoriesDao;
 
 public class MainActivity extends ListActivity
@@ -62,11 +61,8 @@ public class MainActivity extends ListActivity
     @Override
     protected void onListItemClick(ListView list, View view, int position, long id) {
         super.onListItemClick(list, view, position, id);
-        Categories categories = helper.getCategoryByPkId(position + 1);
-        System.out.println("You clicked " + categories.getCategory_name() + " at position " + categories.getId());
-
         final Intent intent = new Intent(this, DatasetsActivity.class);
-        intent.putExtra("pk", categories.getId());
+        intent.putExtra("pk", id);
         startActivityForResult(intent, 1);
     }
 
@@ -80,7 +76,7 @@ public class MainActivity extends ListActivity
             final Uri uri;
             final CursorLoader loader;
 
-            uri    = NameContentProvider.CATEGORY_CONTENT_URI;
+            uri    = DBContentProvider.CATEGORY_CONTENT_URI;
             loader = new CursorLoader(MainActivity.this, uri, null, null, null, null);
 
             return (loader);

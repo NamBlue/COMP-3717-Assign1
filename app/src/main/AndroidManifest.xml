@@ -19,7 +19,7 @@
         <activity android:name=".AboutActivity">
         </activity>
         <provider
-            android:name=".NameContentProvider"
+            android:name=".DBContentProvider"
             android:authorities="opendata.a00965170.comp3717.bcit.ca.assignment1"
             android:enabled="true"
             android:exported="false">
