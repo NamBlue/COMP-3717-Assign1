@@ -11,19 +11,21 @@ public class NameContentProvider
     extends ContentProvider
 {
     private static final UriMatcher uriMatcher;
-    private static final int NAMES_URI = 1;
-    public static final Uri CONTENT_URI;
+    private static final int CATEGORY_URI = 1, DATASET_URI = 2;
+    public static final Uri CATEGORY_CONTENT_URI, DATASET_CONTENT_URI;
     private DatabaseHelper helper;
 
     static
     {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI("opendata.a00965170.comp3717.bcit.ca.assignment1", "names", NAMES_URI);
+        uriMatcher.addURI("opendata.a00965170.comp3717.bcit.ca.assignment1", "categories", CATEGORY_URI);
+        uriMatcher.addURI("opendata.a00965170.comp3717.bcit.ca.assignment1", "datasets", DATASET_URI);
     }
 
     static
     {
-        CONTENT_URI = Uri.parse("content://opendata.a00965170.comp3717.bcit.ca.assignment1/names");
+        CATEGORY_CONTENT_URI = Uri.parse("content://opendata.a00965170.comp3717.bcit.ca.assignment1/categories");
+        DATASET_CONTENT_URI = Uri.parse("content://opendata.a00965170.comp3717.bcit.ca.assignment1/datasets");
     }
 
     @Override
@@ -45,12 +47,21 @@ public class NameContentProvider
 
         switch (uriMatcher.match(uri))
         {
-            case NAMES_URI:
+            case CATEGORY_URI:
             {
                 final SQLiteDatabase db;
 
                 helper.openDatabaseForReading(getContext());
-                cursor = helper.getNamesCursor();
+                cursor = helper.getCategoriesCursor();
+                helper.close();
+                break;
+            }
+            case DATASET_URI:
+            {
+                final SQLiteDatabase db;
+
+                helper.openDatabaseForReading(getContext());
+                cursor = helper.getDatasetsByFKCursor(selection);
                 helper.close();
                 break;
             }
@@ -70,8 +81,8 @@ public class NameContentProvider
 
         switch(uriMatcher.match(uri))
         {
-            case NAMES_URI:
-                type = "vnd.android.cursor.dir/vnd.opendata.a00965170.comp3717.bcit.ca.assignment1.names";
+            case CATEGORY_URI:
+                type = "vnd.android.cursor.dir/vnd.opendata.a00965170.comp3717.bcit.ca.assignment1.categories";
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported URI: " + uri);

@@ -1,39 +1,49 @@
 package opendata.a00965170.comp3717.bcit.ca.assignment1;
 
+import android.util.Log;
+
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Categories;
+import opendata.a00965170.comp3717.bcit.ca.database.schema.CategoriesDao;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Datasets;
 
 /**
  * Created by NamBlue on 2/7/2017.
  */
 
-public class ContentProvider
+public class DatabasePopulator
 {
+    public static DatabaseHelper helper;
+
     public static void populateDatabase()
     {
-        populateCategories();
-        populateCityData();
-        populateCityLand();
-        populateUndergroundData();
-        populateMiscellaneous();
-        populatePublicUtilities();
-        populateStreetInformation();
+        if (helper != null)
+        {
+            populateCategories();
+            helper.createDataset("Heritage Register", "Official listing of properties deemed to have heritage value. Visit the Heritage Register Website Viewer.", 2L);
+            helper.createDataset("Heritage Resource Inventory", "Complete unofficial listing of properties deemed to have heritage value, demolished and standing buildings. Visit the Heritage Resource Inventory Website Viewer!", 2L);
+            helper.createDataset("Hospital Buildings", "No Description Available", 2L);
+            /*
+            populateCityData();
+            populateCityLand();
+            populateUndergroundData();
+            populateMiscellaneous();
+            populatePublicUtilities();
+            populateStreetInformation();*/
+        }
+        else
+        {
+            Log.e("Error: ","Called DatabasePopulator without providing the helper context");
+        }
     }
 
     public static void populateCategories()
     {
-        Categories temp_categories = new Categories(null, "City Data", 1L);
-        DaoHelper.SaveToCategories(temp_categories);
-        temp_categories = new Categories(null, "City Land Information", 2L);
-        DaoHelper.SaveToCategories(temp_categories);
-        temp_categories = new Categories(null, "City Underground Related Data", 3L);
-        DaoHelper.SaveToCategories(temp_categories);
-        temp_categories = new Categories(null, "Miscellaneous", 4L);
-        DaoHelper.SaveToCategories(temp_categories);
-        temp_categories = new Categories(null, "Public Utilities", 5L);
-        DaoHelper.SaveToCategories(temp_categories);
-        temp_categories = new Categories(null, "Street Information", 6L);
-        DaoHelper.SaveToCategories(temp_categories);
+        helper.createCategory("City Data", 1L);
+        helper.createCategory("City Land Information", 2L);
+        helper.createCategory("City Underground Related Data", 3L);
+        helper.createCategory("Miscellaneous", 4L);
+        helper.createCategory("Public Utilities", 5L);
+        helper.createCategory("Street Information", 6L);
     }
 
     public static void populateCityData()

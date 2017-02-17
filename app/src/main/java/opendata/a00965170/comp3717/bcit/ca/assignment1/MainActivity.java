@@ -9,57 +9,25 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import opendata.a00965170.comp3717.bcit.ca.database.schema.Categories;
 import opendata.a00965170.comp3717.bcit.ca.database.schema.CategoriesDao;
 
 public class MainActivity extends ListActivity
 {
-    private List<String> listValues;
-    private List<Categories> categoriesList;
     private SimpleCursorAdapter adapter;
+    private final DatabaseHelper helper = DatabaseHelper.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        final DatabaseHelper helper;
         final LoaderManager manager;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*
-        //Initialise DAO
-        DaoHelper.setupDb(this);
 
-        ContentProvider.clearDatabase();
-        ContentProvider.populateDatabase();
-
-        listValues = new ArrayList<String>();
-        categoriesList = DaoHelper.getCategoriesFromSQL();
-        if (categoriesList != null)
-        {
-            for(Categories cl: categoriesList)
-            {
-                listValues.add(cl.getCategory_name());
-            }
-        }
-
-
-
-        // initiate the listadapter
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this,
-                R.layout.row_layout, R.id.listText, listValues);
-
-        // assign the list adapter
-        setListAdapter(myAdapter);*/
-
-        helper = DatabaseHelper.getInstance(this);
         helper.openDatabaseForReading(this);
         adapter = new SimpleCursorAdapter(getBaseContext(),
                 android.R.layout.simple_list_item_1,
@@ -75,35 +43,26 @@ public class MainActivity extends ListActivity
                 0);
         setListAdapter(adapter);
         manager = getLoaderManager();
-        manager.initLoader(0, null, new NameLoaderCallbacks());
+        manager.initLoader(0, null, new CategoryLoaderCallbacks());
         init();
     }
 
     private void init()
     {
-        final DatabaseHelper helper;
-        final long           numEntries;
+        final DatabaseHelper _helper;
 
-        helper = DatabaseHelper.getInstance(this);
-        helper.openDatabaseForWriting(this);
-        numEntries = helper.getNumberOfNames();
-
-        if(numEntries == 0)
-        {
-            helper.createName("D'Arcy", 1);
-            helper.createName("Medhat", 2);
-            helper.createName("Jason" , 3);
-            helper.createName("Albert", 4);
-        }
-
-        helper.close();
+        _helper = DatabaseHelper.getInstance(this);
+        _helper.openDatabaseForWriting(this);
+        _helper.clearDatabase();
+        _helper.populateDatabase();
+        _helper.close();
     }
 
     // when an item of the list is clicked
     @Override
     protected void onListItemClick(ListView list, View view, int position, long id) {
         super.onListItemClick(list, view, position, id);
-        Categories categories = categoriesList.get(position);
+        Categories categories = helper.getCategoryByPkId(position + 1);
         System.out.println("You clicked " + categories.getCategory_name() + " at position " + categories.getId());
 
         final Intent intent = new Intent(this, DatasetsActivity.class);
@@ -111,7 +70,7 @@ public class MainActivity extends ListActivity
         startActivityForResult(intent, 1);
     }
 
-    private class NameLoaderCallbacks
+    private class CategoryLoaderCallbacks
             implements LoaderManager.LoaderCallbacks<Cursor>
     {
         @Override
@@ -121,7 +80,7 @@ public class MainActivity extends ListActivity
             final Uri uri;
             final CursorLoader loader;
 
-            uri    = NameContentProvider.CONTENT_URI;
+            uri    = NameContentProvider.CATEGORY_CONTENT_URI;
             loader = new CursorLoader(MainActivity.this, uri, null, null, null, null);
 
             return (loader);
